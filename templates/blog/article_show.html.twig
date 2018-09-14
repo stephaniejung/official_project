@@ -1,0 +1,22 @@
+{% extends 'layout_sidebar.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block content %}
+    <article>
+        <h3 class="pb-3 mb-4 font-italic border-bottom"> Ecrit le {{article.createdAt | date('d/m/Y')}} a {{article.createdAt | date('H:i')}} dans la catégorie
+            <a href="#"> {% if article.heading.title is defined and article.heading.title is not empty %}
+                    {{ article.heading.title }}
+                {% else %}
+                    Non classé
+                {% endif %}
+            </a></h3>
+        <div class="blog-post pb-4">
+            <h2 class="blog-post-title"></h2>
+            <div class="content">
+                <img src="{{article.image}}" alt="">
+                <p>{{article.content | raw }}</p>
+            </div>
+        </div>
+    </article>
+{% endblock %}

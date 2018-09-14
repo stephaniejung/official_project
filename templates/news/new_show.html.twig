@@ -1,0 +1,24 @@
+{% extends 'layout_sidebar.html.twig' %}
+
+{% block title %} {{ title }} | Réciprocité Nancy{% endblock %}
+
+{% block content %}
+    <article>
+        <h3 class="pb-3 mb-4 font-italic border-bottom"> Ecrit le {{news.createdAt | date('d/m/Y')}} a {{news.createdAt | date('H:i')}} dans la catégorie
+             <a href="#"> {% if news.categorie.title is defined and news.categorie.title is not empty %}
+                    {{ news.categorie.name }}
+                {% else %}
+                    Non classé
+                {% endif %}
+
+            </a></h3>
+        <div class="blog-post pb-4">
+            <h2 class="blog-post-title"></h2>
+            <div class="content">
+                <img src="{{news.image}}" alt="">
+
+                <p>{{news.content | raw }}</p>
+            </div>
+        </div>
+    </article>
+{% endblock %}

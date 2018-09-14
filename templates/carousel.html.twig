@@ -1,0 +1,98 @@
+<!-- variable globale app.request - parent ou included slides-banners.twig.thml -->
+    {% if app.request.attributes.get('_route') == 'home' %}
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="
+  margin-top:-138px;">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active soft-bg" style="background-image: url('{{ asset('images/carousel/slider1.jpg') }}')">
+                    <div class="carousel-caption">
+                        <div class="row m-5 d-flex justify-content-center">
+                            <div class="col-3 d-none d-lg-block">
+                                <div class="circle-home rounded-circle d-flex justify-content-center align-items-center align-content-center animated bounceInDown">
+                                    <div>
+                                        <h6>NOTRE CREDO</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-none d-lg-block">
+                                <div class="circle-home rounded-circle d-flex justify-content-center align-items-center align-content-center " data-wow-delay="1.7s">
+                                    <div>
+                                        <h6>NOTRE FORCE</h6>
+                                        <p><small>Savoir rentrer chez les gens, (re)nouer le contact, informer, sensibiliser</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-none d-lg-block">
+                                <div class="circle-home rounded-circle d-flex justify-content-center align-items-center align-content-center animated bounceInDown">
+                                    <div>
+                                        <h6>NOS ATOUTS</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-none d-lg-block">
+                                <div class="circle-home rounded-circle d-flex justify-content-center align-items-center align-content-center animated bounceInDown">
+                                    <div class="text-center">
+                                        <h6>NOS VALEURS</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1>RÉseau Citoyen des PROfessionnels de la CITÉ</h1>
+                        <p class="lead">Contribuer à réduire l'exclusion et créer du lien social</p>
+                         </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item soft-bg" style="background-image: url('{{ asset('images/carousel/slider2.jpg') }}')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h1 class="animated bounceInLeft">Acteur de l’insertion sociale et professionnelle par l’activité économique.</h1>
+                        <p class="lead animated bounceInRight">Accompagner nos salariés dans une dynamique de retour à l'emploi.</p>
+
+                         <p><a class="btn btn-dark rounded-0 text-uppercase animated bounceInUp" href="" role="button"><small>En savoir plus &raquo;</small></a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item soft-bg" style="background-image: url('{{ asset('images/carousel/slider3.jpg') }}')">
+                    <div class="carousel-caption ">
+                        <h1 class="animated bounceInLeft">Prestataire de services urbains de proximité aux collectivités et aux entreprises</h1>
+                        <p class="lead animated bounceInRight" >Notre Credo : Faciliter la vie dans la ville et dans l'entreprise.</p>
+
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+    {% elseif app.request.attributes.get('_route') == 'actualites' %}
+        <div class="jumbotron text-white bg-secondary">
+            <div class="container">
+                <div class="col-md-6 px-0">
+                    {% if title is defined %}<h1 class="text-uppercase font-italic animated bounceInRight">{{ title }}! </h1>{% else %} {% endif %}
+                    {% if category.name is defined %}<h1 class="text-uppercase font-italic animated bounceInRight">{{ category.name }}</h1>{% else %}{% endif %}
+                    <p class="lead my-3 animated bounceInLeft">Liste des articles du blog Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
+                    <p class="lead mb-0 animated fadeInDownBig"><a href="#" class="text-white font-weight-bold">Lire la suite...</a></p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="jumbotron text-white bg-secondary rounded-0 mb-0">
+            <div class="container text-center">
+                {% if title is defined %}<h1 class="text-uppercase">{{ title }}</h1>{% else %}{% endif %}
+                {% if subtitle is defined %}<h2>{{ subtitle }} </h2>{% else %}{% endif %}
+
+            </div>
+        </div>
+    {% endif %}
+    <!-- end slides-banners -->

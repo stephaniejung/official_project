@@ -1,0 +1,29 @@
+{% extends 'layout_sidebar.html.twig' %}
+
+{% block title %} {{ category.name }} | Réciprocité Nancy{% endblock %}
+
+{% block content %}
+
+    <h3 class="pb-3 mb-4 font-italic border-bottom">Toutes les actualités </h3>
+
+    {% for news in category.news %}
+        <div class="blog-post pb-4">
+            <h2 class="blog-post-title">{{ category.name }}</h2>
+
+            {% if news.title is defined and news.title is not empty %}
+                <a  href="{{ path('news_show', {'id':news.id}) }}">
+                    {{ news.title }}
+                {% else %}
+                    Aucune actualité
+                    </a>
+                {% endif %}
+            </p>
+        </div><!-- /.blog-article -->
+    {% endfor %}
+
+    <nav class="blog-pagination border-top pt-4 mb-5">
+        <a class="btn btn-outline-success" href="#">Précédent</a>
+        <a class="btn btn-outline-secondary disabled" href="#">Suivant</a>
+    </nav>
+
+{% endblock %}

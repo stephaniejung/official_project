@@ -1,0 +1,61 @@
+{% extends 'layout_sidebar.html.twig' %}
+
+{% block test %}<!-- /.blog-article a la une-->
+<div class="container">
+    <div class="row mb-2">
+        {% for news in news |reverse |slice(0,2) %}
+        <div class="col-md-6">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column align-items-start">
+                    <strong class="d-inline-block mb-2 text-danger">
+                        {% if news.category.name is defined and news.category.name is not empty %}
+                        {{ news.category.name }}
+                        {% else %}
+                            Non classé
+                        {% endif %}
+                    </strong>
+                    <h3 class="mb-0">
+                        <a class="text-dark" href="{{ path('news_show', {'id':news.id}) }}">{{ news.title }} à la une</a>
+                    </h3>
+                    <div class="mb-1 text-muted">{{ news.createdAt | date('d/m/Y') }}</div>
+                    <p class="card-text mb-auto">{{ news.content |slice(0, 75) | raw }}...</p>
+                    <a class="text-success" href="{{ path('news_show', {'id':news.id}) }}">Lire la suite</a>
+                </div>
+                <img class="card-img-right d-none d-md-block" src="{{ news.image }}" alt="image">
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+    <h3 class="pb-3 mb-4 font-italic border-bottom">Toutes les actualités </h3>
+
+    {% for news in news %}
+        <div class="blog-post pb-4">
+            <h2 class="blog-post-title">{{ news.title }}</h2>
+
+        <p class="blog-post-meta">{{ news.createdAt | date('d/m/Y') }} a {{ news.createdAt | date('H:i') }} dans la catégorie
+            {% if news.category.name is defined and news.category.name is not empty %}
+            <a  href="{{ path('category_show', {'id':news.category.id}) }}">
+                {{ news.category.name }}
+                {% else %}
+                    Non classé
+                {% endif %}
+            </a>
+        </p>
+        <p><img src="{{ news.image }}" alt=""></p>
+        <p>{{ news.content | raw }}</p>
+        <p><a class="btn btn-outline-danger rounded-0" href="{{ path('news_show', {'id':news.id}) }}">Lire la suite</a>
+        </p>
+        </div><!-- /.blog-article -->
+    {% endfor %}
+
+    <nav class="blog-pagination border-top pt-4 mb-5">
+        <a class="btn btn-outline-success" href="#">Précédent</a>
+        <a class="btn btn-outline-secondary disabled" href="#">Suivant</a>
+    </nav>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'layout_sidebar.html.twig' %}
+
+{% block test %}<!-- /.blog-article a la une-->
+    <div class="container">
+    <div class="row mb-2">
+        {% for article in articles |reverse |slice(0,2) %}
+            <div class="col-md-6">
+                <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                    <div class="card-body d-flex flex-column align-items-start">
+                        <strong class="d-inline-block mb-2 text-danger">
+                            {% if article.heading.title is defined and article.heading.title is not empty %}
+                                {{ article.heading.title }}
+                            {% else %}
+                                Non classé
+                            {% endif %}
+                        </strong>
+                        <h3 class="mb-0">
+                            <a class="text-dark" href="{{ path('article_show', {'id':article.id}) }}">{{ article.title }} à la une</a>
+                        </h3>
+                        <div class="mb-1 text-muted">{{ article.createdAt | date('d/m/Y') }}</div>
+                        <p class="card-text mb-auto">{{ article.content |slice(0, 75) | raw }}...</p>
+                        <a class="text-success" href="{{ path('article_show', {'id':article.id}) }}">Lire la suite</a>
+                    </div>
+                    <img class="card-img-right d-none d-md-block" style="" src="{{ article.image }}" alt="image">
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    <h3 class="pb-3 mb-4 font-italic border-bottom">Toutes les actualités</h3>
+    {% for article in articles %}
+        <div class="blog-post pb-4">
+            <h2 class="blog-post-title">{{ article.title }}</h2>
+            <p class="blog-post-meta">{{ article.createdAt | date('d/m/Y') }} a {{ article.createdAt | date('H:i') }} dans la catégorie
+                {% if article.heading.title is defined and article.heading.title is not empty %}  <a  href="{{ path('heading_show', {'id':article.heading.id}) }}">
+                    {{ article.heading.title }}
+                    {% else %}
+                        Non classé
+                    {% endif %}
+                </a>
+            </p>
+            <p><img src="{{ article.image }}" alt=""></p>
+            <p>{{ article.content | raw }}</p>
+            <ul>
+                <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+                <li>Donec id elit non mi porta gravida at eget metus.</li>
+                <li>Nulla vitae elit libero, a pharetra augue.</li>
+            </ul>
+            <p><a class="btn btn-outline-danger rounded-0" href="{{ path('article_show', {'id':article.id}) }}">Lire la suite</a>
+            </p>
+        </div><!-- /.blog-article -->
+    {% endfor %}
+
+    <nav class="blog-pagination border-top pt-4 mb-5">
+        <a class="btn btn-outline-success" href="#">Précédent</a>
+        <a class="btn btn-outline-secondary disabled" href="#">Suivant</a>
+    </nav>
+
+
+
+
+{% endblock %}

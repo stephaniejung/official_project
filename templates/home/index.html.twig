@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Accueil - {{ controller_name }}!{% endblock %}
+
+{% block body %}
+
+    <div class="bg-dark py-5">
+        <div class="container">
+            <div class="row text-light">
+                <div class="col-lg-6 home-desc">
+                    <div><p class="lead font-italic">Services urbains de proximité depuis 18 ans!</p></div>
+                </div>
+                <div class="col-lg-6 home-desc-right">
+                    <a class="btn btn-danger text-uppercase rounded-0" href="{{path('contact')}}">Contactez-nous</a>
+                    <a class="btn btn-danger text-uppercase rounded-0" href="{{path('contact')}}">Rejoignez-nous</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="py-5">
+        <div class="container">
+            {% for heading in headings if heading.position==1 %}
+            <div class="text-center pb-4">
+                <h2 class="text-uppercase">Des activités créatrices d’emploi</h2>
+                <h3>Au coeur du Grand Nancy</h3>
+                <p class="">Association d’Insertion par l’Économie, agrée depuis 18 ans. Nos activités constituent un ensemble de services innovants, destinés aux habitants, aux entreprises, et aux collectivités ; elles s'inscrivent dans le cadre général du développement durable et dans sa valeur fondamentale la
+                    <span class="text-danger font-weight-bold">SOLIDARITE</span>.
+                </p>
+                <p class="lead">
+                    <a class="btn btn-outline-secondary rounded-0 text-uppercase" href="{{ path('heading_show', {'id':heading.id}) }}" role="button">Découvrir Réciprocité &raquo;</a>
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section class="py-5 bg-light">
+        <div class="container-fluid">
+            <div class="text-center pb-3">
+                <h2 class="text-uppercase">Nos activités</h2>
+                <h3>2 pôles de compétences</h3>
+            </div>
+            <div class="row">
+                {% for heading in headings |slice(1, 2) %}
+                    <div class="col-md-6">
+                        <div class="card mb-6 box-shadow bg-secondary rounded-0 text-light text-center">
+                            <div class="card-body">
+                                <h3 class="card-title">{{ heading.title }}</h3>
+                                <h5 class="card-title">{% if heading.subtitle is defined %}<h5>{{ heading.subtitle }}</h5>{% endif %}</h5>
+                                <p class="card-text"> {% if heading.description is defined %}{{ heading.description |slice(0, 195) }}{% endif %}</p>
+                                <div class="">
+                                    <div class="btn-group">
+                                        <p><a class="btn btn-sm btn-outline-light text-uppercase" href="{{ path('heading_show', {'id':heading.id}) }}"><i class="fa fa-plus-circle" style=""></i>  En savoir plus</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container text-center">
+            {% for heading in headings if heading.position==4 %}
+                <div class=" pb-4">
+                    <h2 class="text-uppercase">L'{{ heading.title|e }}</h2>
+                    <h3>Un accompagnement socio-professionnel permanent</h3>
+                </div>
+                <div class="row">
+                    {% for article in heading.articles %}
+                        <div class="col-4">
+                            <h4> {{ article.title }}</h4>
+                            <p>{{ article.content | raw }}<a class="btn btn-sm btn-outline-primary text-uppercase" href="{{ path('article_show', {'id':article.id}) }}">Découvrir</a></p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container-fluid">
+            <div class="text-center pb-4">
+                <h2 class="text-uppercase">Les actualités</h2>
+            </div>
+            <div class="row">
+                {% for article in articles | reverse |slice(0, 6) %}
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card mb-4 box-shadow bg-secondary border-0 text-white">
+                            <img class="card-img-top" style="height: 250px;width: 100%; " src="{{ article.image }}" alt="">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <div class="d-flex align-items-center">
+                                        <div class="rounded-circle border border-muted d-flex align-items-center justify-content-center text-center" style="width:110px;height:110px;">
+                                            <div>
+                                                <h3 class="text-white font-weight-bold m-0">{{ article.createdAt |date('d') }}</h3>
+                                                <h4 class="text-light m-0 ">{{ article.createdAt |date('m') }}</h4>
+                                                <p class="text-white-50 m-0 ">{{ article.createdAt | date('Y') }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pl-3">
+                                        {% if article.heading.title is defined and article.heading.title is not empty %}
+                                            <a class="" href="{{ path('heading_show', {'id':article.heading.id}) }}">
+                                                {{ article.heading.title }}</a>
+                                        {% else %}
+                                            Non classé
+                                        {% endif %}
+                                        <h5 class="card-title font-weight-bold">{{ article.title }}</h5>
+                                        <p class="card-text text-light">{{ article.content |slice(0, 45) | striptags }}...</p>
+                                        <a class="btn btn-sm btn-outline-danger rounded-0 text-uppercase" href="{{path('article_show', {'id':article.id}) }}">Lire la suite</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="text-center">
+                <a class="btn btn-outline-secondary rounded-0 text-uppercase" href="{{path('blog')}}"> <i class="fa fa-plus-circle" style=""></i> Toutes les actualités</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5 bg-light">
+        <div class="container-fluid">
+            <div class="text-center pb-4">
+                <h2 class="text-uppercase">Réciprocité en chiffres</h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container-fluid text-center">
+            <div class="">
+                <h2 class="text-uppercase">Nos partenaires</h2>
+                <h3>Ils nous font confiance</h3>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <section class="customer-logos slider py-3">
+                        {% for partner in partners  %}
+                            <div class="slide">
+                                <div class="figure">
+                                    <img src="{{partner.image}}" class="img-fluid" alt="{{ partner.name }}">
+                                    <div class="figure-caption">
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <div><a href="{{ partner.link }}" target="_blank">{{ partner.name }}{{ partner.link }}</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </section>
+                    <p>Nos activités, créatrices d’emploi, apportent une réponse aux besoins exprimés par les collectivités et les entreprises en matière de RSE. Elles sont mises en œuvre avec et grâce à de nombreux partenaires privés et publics sous forme de marchés ou de conventions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

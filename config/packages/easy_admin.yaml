@@ -1,0 +1,48 @@
+easy_admin:
+  site_name: 'Réciprocité <em style="font-size: 80%:">Backend</em>'
+  design:
+    brand_color: '#cc0931'
+    assets:
+      favicon: '/assets/backend/favicon.ico'
+  entities:
+    User:
+      class: App\Entity\User
+      form:
+        fields:
+        - username
+        - email
+        - enabled
+        - lastLogin
+        # if administrators are allowed to edit users' passwords and roles, add this:
+        - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+        - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+
+    Heading:
+      class: App\Entity\Heading
+    HeadingType:
+      class: App\Entity\HeadingType
+    Article:
+      class: App\Entity\Article
+      form:
+        fields:
+        - title
+        - { property: 'content', type: 'FOS\CKEditorBundle\Form\Type\CKEditorType' }
+        - image
+        - position
+        - { property: 'createdAt', type: 'datetime' }
+        - { property: 'modifiedAt', type: 'datetime' }
+        - { property: 'validatedAt', type: 'datetime' }
+        - heading
+        - validated
+    Partner:
+      class : App\Entity\Partner
+    News:
+      class: App\Entity\News
+      form:
+        fields:
+        - title
+        - { property: 'content', type: 'FOS\CKEditorBundle\Form\Type\CKEditorType' }
+        - image
+
+    Category:
+      class: App\Entity\Category

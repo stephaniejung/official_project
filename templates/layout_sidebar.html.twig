@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% block test %}{% endblock %}
+<div class="container py-5">
+
+    <div class="row">
+
+        <div class="col-md-8 blog-main">
+            {% block content %}{% endblock %}
+        </div>
+
+
+            <!-- /.blog-sidebar .{parent }} a mettre dans base.twig-->
+            <aside class="col-md-4 blog-sidebar">
+                <div class="p-3 mb-3 bg-heading rounded">
+                    <h4 class="font-italic">Réciprocité</h4>
+                    <p class="mb-0">Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+                </div>
+
+                <div class="p-3">
+                    <h4 class="font-italic">Catégorie</h4>
+                    <ol class="list-unstyled">
+                        <li><a href="#">Presse médias</a></li>
+                        <li><a href="#">Calendrier</a></li>
+                        <li><a href="#">Témoignages</a></li>
+                    </ol>
+                </div>
+            </aside><!-- /.blog-sidebar -->
+        </div></div>
+{% endblock %}

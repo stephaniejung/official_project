@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme formArticle 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <script src="//cdn.ckeditor.com/4.4.5.1/full/ckeditor.js"></script>
+
+    <h1>Création d'un article</h1>
+
+    {{ form_start(formArticle) }}
+
+    {{ form_row(formArticle.title, {'attr':{'placeholder': "Titre de l'article"} }) }}
+
+    {{ form_row(formArticle.heading) }}
+
+    {{ form_row(formArticle.content, {'id': 'editor1'},{'attr':{'placeholder': "Contenu de l'article"} }) }}
+
+    {#{{ form_row(formArticle.image, {'attr':{'placeholder': "URL de Image"} }) }}#}
+
+    {{ form_row(formArticle.position, {'attr':{'placeholder': "position"} }) }}
+
+    <button type="submit" class="btn btn-danger">
+        {% if editMode %}
+            mettre à jour l'article
+        {% else %}
+            Ajouter l'article
+        {% endif %}
+    </button>
+
+    {{ form_end(formArticle) }}
+    <script>
+        CKEDITOR.replace( 'editor1', {
+            language: 'fr',
+            toolbar: [
+                { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste'] },
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align'], items: [ 'NumberedList', 'BulletedList', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
+                { name: 'insert', items: [ 'Table', 'SpecialChar' ] },
+                '/',
+                { name: 'styles', items: [ 'Format', 'Font', 'FontSize' ] },
+                { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+                { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] }
+            ]
+        });
+    </script>
+{% endblock %}

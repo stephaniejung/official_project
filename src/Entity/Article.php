@@ -39,11 +39,15 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    * @ORM\Column(type="string", length=255, nullable=true)
+    * @Assert\File(mimeTypes={ "image/*" })
+    */
     private $image;
 
-    /**
+    private $file;
+
+
+/**
      * @ORM\Column(type="integer")
      */
     private $position;
@@ -56,7 +60,7 @@ class Article
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $modifiedAt;
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -73,6 +77,10 @@ class Article
      */
     private $heading;
 
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId()
     {
@@ -102,7 +110,7 @@ class Article
 
         return $this;
     }
-
+        // si erreur enlever ?string
     public function getImage(): ?string
     {
         return $this->image;

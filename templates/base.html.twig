@@ -31,15 +31,6 @@
                 </li>
             </ul>
 
-            {#{% for user in user.roles %}
-            {% if is_granted('ROLE_ADMIN') %}
-                Administrator {{ user.username }}
-            {% elseif is_granted('ROLE_USER') %}
-                User
-            {% else %}
-                Anonymous
-            {% endif %}
-            {% endfor %}#}
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -57,7 +48,7 @@
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{path('admin')}}"><i class="hidden-xs fa fa-lock"></i> Admin</a>
+                                    <a href="#"><i class="hidden-xs fa fa-lock"></i> Admin</a>
                                 </li>
                             </ul>
                         </div>

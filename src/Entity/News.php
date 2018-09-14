@@ -43,7 +43,12 @@ class News
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $modifiedAt;
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default":false})
+     */
+    private $validated;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="news")
@@ -104,14 +109,14 @@ class News
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->modifiedAt;
+        return $this->updatedAt;
     }
 
-    public function setModifiedAt(?\DateTimeInterface $modifiedAt): self
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
     {
-        $this->modifiedAt = $modifiedAt;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
@@ -132,6 +137,22 @@ class News
         // TODO: Implement __toString() method.
         return $this->title;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValidated()
+    {
+        return $this->validated;
+    }
+
+    /**
+     * @param mixed $validated
+     */
+    public function setValidated($validated): void
+    {
+        $this->validated = $validated;
     }
 
 }
